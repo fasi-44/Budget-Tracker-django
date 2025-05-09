@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import (
-    LoginView,
+    login,
     get_total_income_or_expense,
     get_total_no_of_transactions,
     get_total_by_category,
@@ -16,7 +16,7 @@ from .views import (
 )
 
 urlpatterns = [
-    path("auth/signin", LoginView.as_view(), name="login"),
+    path('auth/signin', login),
     path('report/getTotalIncomeOrExpense', get_total_income_or_expense),
     path('report/getTotalNoOfTransactions', get_total_no_of_transactions),
     path('report/getTotalByCategory', get_total_by_category),
