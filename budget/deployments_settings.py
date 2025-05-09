@@ -2,10 +2,16 @@ import os
 from .settings import *
 from .settings import BASE_DIR
 import dj_database_url
+import logging
+
+logger = logging.getLogger(__name__)
 
 render_host = os.environ.get('RENDER_EXTERNAL_HOST')
 ALLOWED_HOSTS = [render_host] if render_host else []
 CSRF_TRUSTED_ORIGINS = ['https://' + render_host] if render_host else []
+
+logger.info(f"RENDER_EXTERNAL_HOST: {render_host}")  # Log the value
+logger.info(f"ALLOWED_HOSTS: {ALLOWED_HOSTS}")
 
 DEBUG = False
 SECRET_KEY = os.environ.get('SECRET_KEY')
