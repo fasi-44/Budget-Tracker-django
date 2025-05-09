@@ -8,11 +8,6 @@ render_host = os.environ.get('RENDER_EXTERNAL_HOST')
 ALLOWED_HOSTS = [render_host] if render_host else []
 CSRF_TRUSTED_ORIGINS = ['https://' + render_host] if render_host else []
 
-print("-----------------------------------DEBUGGING-----------------------------------")
-print(f"RENDER_EXTERNAL_HOST: {render_host}")
-print(f"ALLOWED_HOSTS: {ALLOWED_HOSTS}")
-print("-----------------------------------------------------------------------------")
-
 DEBUG = False
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
@@ -29,7 +24,9 @@ MIDDLEWARE = [
 ]
 
 
-# CORS_ALLOW_ALL_ORIGINS = True 
+CORS_ALLOW_ALL_ORIGINS = [
+    'https://budget-tracker-react-hu18.onrender.com'
+] 
 
 STORAGES = {
     "default": {
