@@ -24,7 +24,9 @@ MIDDLEWARE = [
 ]
 
 
-CORS_ALLOW_ALL_ORIGINS = True 
+CORS_ALLOWED_ORIGINS = [
+    "https://budget-tracker-react-hu18.onrender.com",  # Replace with your React app's domain
+]
 
 STORAGES = {
     "default": {
