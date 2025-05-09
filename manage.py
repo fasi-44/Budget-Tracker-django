@@ -8,6 +8,7 @@ def main():
     """Run administrative tasks."""
     # settings_module = 'budget.deployments_settings' if 'RENDER_EXTERNAL_HOST' in os.environ else 'budget.settings'
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'budget.deployments_settings')
+    # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'budget.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

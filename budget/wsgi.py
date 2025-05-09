@@ -13,5 +13,6 @@ from django.core.wsgi import get_wsgi_application
 
 # settings_module = 'budget.deployments_settings' if 'RENDER_EXTERNAL_HOST' in os.environ else 'budget.settings'
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'budget.deployments_settings')
+# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'budget.settings')
 
 application = get_wsgi_application()
