@@ -23,22 +23,21 @@ class LoginView(APIView):
 
         try:
             user = User.objects.get(email=email)
+            user = authenticate(username=user.username, password=password)
+            if user:
+                refresh = RefreshToken.for_user(user)
+                return Response({
+                    "token": str(refresh.access_token),
+                    "refresh": str(refresh),
+                    "user": {
+                        "username": user.username,
+                        "email": user.email,
+                        'userId': user.id,
+                    }
+                })
+            else:
+                return Response({"message": "Invalid email or password"}, status=status.HTTP_401_UNAUTHORIZED)
         except User.DoesNotExist:
-            return Response({"message": "Invalid email or password"}, status=status.HTTP_401_UNAUTHORIZED)
-
-        user = authenticate(username=user.username, password=password)
-        if user:
-            refresh = RefreshToken.for_user(user)
-            return Response({
-                "token": str(refresh.access_token),
-                "refresh": str(refresh),
-                "user": {
-                    "username": user.username,
-                    "email": user.email,
-                    'userId': user.id,
-                }
-            })
-        else:
             return Response({"message": "Invalid email or password"}, status=status.HTTP_401_UNAUTHORIZED)
 
 @api_view(['GET'])
