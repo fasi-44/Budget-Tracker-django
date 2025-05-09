@@ -1,6 +1,5 @@
-from django.shortcuts import render, redirect
+from django.urls import path, include
 
-def root_view(request):
-    # return HttpResponse("This is a different message!")
-    # return render(request, "welcome.html")  # Render a template
-    return redirect("/api/")  # Redirect to your API
+urlpatterns = [
+    path("", include("api.urls")),
+]
