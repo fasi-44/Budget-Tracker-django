@@ -16,30 +16,29 @@ from collections import defaultdict
 from django.core.paginator import Paginator
 from api.serializers import TransactionSerializer
 
-@api_view(['POST'])
-def login(request):
-    print("inside the login")
-    email = request.data.get("email")
-    password = request.data.get("password")
+class LoginView(APIView):
+    def post(self, request):
+        email = request.data.get("email")
+        password = request.data.get("password")
 
-    try:
-        user = User.objects.get(email=email)
-        user = authenticate(username=user.username, password=password)
-        if user:
-            refresh = RefreshToken.for_user(user)
-            return Response({
-                "token": str(refresh.access_token),
-                "refresh": str(refresh),
-                "user": {
-                    "username": user.username,
-                    "email": user.email,
-                    'userId': user.id,
-                }
-            })
-        else:
+        try:
+            user = User.objects.get(email=email)
+            user = authenticate(username=user.username, password=password)
+            if user:
+                refresh = RefreshToken.for_user(user)
+                return Response({
+                    "token": str(refresh.access_token),
+                    "refresh": str(refresh),
+                    "user": {
+                        "username": user.username,
+                        "email": user.email,
+                        'userId': user.id,
+                    }
+                })
+            else:
+                return Response({"message": "Invalid email or password"}, status=status.HTTP_401_UNAUTHORIZED)
+        except User.DoesNotExist:
             return Response({"message": "Invalid email or password"}, status=status.HTTP_401_UNAUTHORIZED)
-    except User.DoesNotExist:
-        return Response({"message": "Invalid email or password"}, status=status.HTTP_401_UNAUTHORIZED)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
