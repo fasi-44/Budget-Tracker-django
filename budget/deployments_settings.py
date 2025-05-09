@@ -24,9 +24,7 @@ MIDDLEWARE = [
 ]
 
 
-CORS_ALLOW_ALL_ORIGINS = [
-    'https://budget-tracker-react-hu18.onrender.com'
-] 
+CORS_ALLOW_ALL_ORIGINS = True 
 
 STORAGES = {
     "default": {
