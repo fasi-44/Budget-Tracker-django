@@ -1,14 +1,15 @@
-from django.urls import path, include, reverse
+from django.urls import path, include
 from django.http import HttpResponse
-from django.shortcuts import redirect
 
 def root_view(request):
     """
-    Redirects the user to the login view.
+    This view will handle requests to the root URL ("/").
+    You can customize this to return a simple message,
+    a welcome page, or redirect to another part of your application.
     """
-    return redirect(reverse('login'))  # 'login' is the name given in api/urls.py
+    return HttpResponse("Welcome to your Budget Tracker API!")  # Simplest response
 
 urlpatterns = [
-    path("", root_view),
+    path("", root_view),  # Add this line for the root URL
     path("api/", include("api.urls")),
 ]
